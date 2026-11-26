@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" width="128" alt="llm-eval-kit logo"></p>
+
 # llm-eval-kit
 
 An evaluation harness for LLM outputs: deterministic scorers, a heuristic
