@@ -25,8 +25,8 @@ def main() -> None:
     judge = None
     if args.llm_judge:
         from src.judges import LLMJudge
-        from openai_compatible import OpenAICompatibleLLM  # local helper below
-        judge = None  # placeholder; see README for wiring your own client
+        from src.llm_client import OpenAICompatibleLLM
+        judge = LLMJudge(OpenAICompatibleLLM())
 
     examples = Path(__file__).parent / "examples"
     result = run_evaluation(examples / "qa_dataset.jsonl", judge=judge)
@@ -34,7 +34,7 @@ def main() -> None:
     (examples / "sample_report.md").write_text(report, encoding="utf-8")
 
     agg = result["aggregates"]
-    print(f"evaluated {agg['items']} items (heuristic judge, offline)")
+    print(f"evaluated {agg['items']} items ({'LLM judge' if args.llm_judge else 'heuristic judge, offline'})")
     for key in ("mean_score", "mean_correctness", "mean_groundedness",
                 "hallucination_rate", "pass_rate"):
         print(f"  {key.replace('_', ' '):20} {agg[key]}")

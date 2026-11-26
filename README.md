@@ -99,3 +99,6 @@ tests/               # offline pytest suite
 - Developed with AI pair-programming assistance; metric choices and the
   failure-mode taxonomy are my own.
 - License: MIT.
+
+## Real LLM-as-judge run (Gemini API free tier)
+`python demo.py --llm-judge` grades the 5 example items with a hosted model (`LLM_API_KEY` from the environment; default `gemini-3.1-flash-lite`). Previously this flag was a placeholder that did nothing; it now makes real calls. Measured Nov 26, 2026 on `examples/qa_dataset.jsonl` (5 items, so treat as a smoke test, not a benchmark): the heuristic judge gave mean score 0.435, hallucination rate 0.2, pass rate 0.4; the LLM judge gave mean score 0.5, hallucination rate 0.4, pass rate 0.4. The two judges agree on pass rate and disagree on which items are hallucinations, which is the reason to run both tiers. The LLM judge report is in `examples/llm_judge_report.md`.
