@@ -48,7 +48,7 @@ golden answer, `prediction` is what the LLM actually answered.
 
 ```text
 evaluated 5 items (heuristic judge, offline)
-  mean score           0.4345
+  mean score           0.4351
   mean correctness     0.3384
   mean groundedness    0.6327
   hallucination rate   0.2
@@ -62,7 +62,7 @@ per-item:
   [5] fail score=0.39 grounded=0.57 How many charging sessions did the Warsaw project analyse?
 ```
 
-Item 2 is a planted hallucination ("trained the YOLO model himself, 99%
+Item 2 is the one planted hallucination in the 5-item example set, so this is a smoke test of the mechanism, not a measured recall ("trained the YOLO model himself, 99%
 accuracy" — the context says his role was deployment). The judge catches
 it by triangulating low groundedness against low correctness, which a
 similarity-only check would miss.
